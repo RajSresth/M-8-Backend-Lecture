@@ -37,3 +37,33 @@ export default add;
 // app.js
 import addition from "./math.js";
 ```
+
+## 3. Difference between common js and module js?
+**1. CommonJS (CJS)**
+CommonJS is a module system primarily used in Node.js.
+It uses require() to import modules.
+It uses module.exports or exports to export modules.
+Modules are generally loaded synchronously.
+
+**2. Module JS / ES Modules (ESM)**
+ES Modules is the standard JavaScript module system defined by ECMAScript.
+It uses import to import modules.
+It uses export to export modules.
+It supports static module analysis and asynchronous module loading.
+
+## 4. What do you mean by Asynchronous loading? 
+Asynchronous loading means a module/resource is loaded without blocking the execution of other JavaScript code. The program can continue executing while the required resource is being fetched.
+
+```
+import("./math.js").then((module) => {
+  console.log(module.add(10, 20));
+});
+
+console.log("Other code");
+```
+
+```
+output: 
+Other code
+30
+```
