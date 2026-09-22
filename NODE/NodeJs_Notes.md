@@ -39,6 +39,7 @@ import addition from "./math.js";
 ```
 
 ## 3. Difference between common js and module js?
+
 **1. CommonJS (CJS)**
 CommonJS is a module system primarily used in Node.js.
 It uses require() to import modules.
@@ -51,7 +52,8 @@ It uses import to import modules.
 It uses export to export modules.
 It supports static module analysis and asynchronous module loading.
 
-## 4. What do you mean by Asynchronous loading? 
+## 4. What do you mean by Asynchronous loading?
+
 Asynchronous loading means a module/resource is loaded without blocking the execution of other JavaScript code. The program can continue executing while the required resource is being fetched.
 
 ```
@@ -59,7 +61,7 @@ import("./math.js").then((response) => {
   console.log(response.add(10, 20));
 });
 
-or 
+or
 // using async await
 const add = await (() =>  import("./A.js"))
 
@@ -67,12 +69,13 @@ console.log("Other code");
 ```
 
 ```
-output: 
+output:
 Other code
 30
 ```
 
 ## 5. What is Module Function Executor?
+
 - In Node.js (CommonJS modules), the “module function executor” refers to the automatic function wrapper that Node.js uses to execute every module.
 
 - Before Node.js runs a module’s code, it wraps the entire file contents inside a function like this:
@@ -83,20 +86,24 @@ Other code
 });
 ```
 
-## 6. What is __filename and __dirname?
-1. **__filename:** 
-The full absolute path of the current JavaScript file (including the filename).
+## 6. What is **filename and **dirname?
+
+1. **\_\_filename:**
+   The full absolute path of the current JavaScript file (including the filename).
+
 ```
   Example: /Users/you/project/app.js
 ```
 
-2. **__dirname:**
-The full absolute path of the folder that contains the current JavaScript file.
+2. **\_\_dirname:**
+   The full absolute path of the folder that contains the current JavaScript file.
+
 ```
   Example: /Users/you/project
 ```
 
 ## 7. What is Path modules?
+
 The path module is a built-in Node.js tool that helps you work with file and folder paths (join them, get the directory name, filename, extension, etc.) in a safe and cross-platform way.
 
 1. **path.join():** Joins path segments safely.
@@ -107,3 +114,4 @@ The path module is a built-in Node.js tool that helps you work with file and fol
 6. **path.parse():** Parses a path into an object.
 7. **path.format():** Builds a path string from an object.
 8. **path.isAbsolute():** Checks if a path is absolute.
+9. **path.normalize():** path.normalize() cleans a path string by resolving . and .. segments and removing extra separators, returning a simplified path.

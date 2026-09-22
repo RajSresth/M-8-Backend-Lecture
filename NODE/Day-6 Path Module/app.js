@@ -15,8 +15,8 @@ const path = require("path");
 /**
  * ! path.join()
  * 1. path.join(arg1, arg2, arg3)
-
 const output = path.join(__dirname, "logs", "user.txt");
 console.log("output:", output);
 */
+
 
