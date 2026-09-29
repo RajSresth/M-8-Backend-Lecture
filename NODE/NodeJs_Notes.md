@@ -115,3 +115,52 @@ The path module is a built-in Node.js tool that helps you work with file and fol
 7. **path.format():** Builds a path string from an object.
 8. **path.isAbsolute():** Checks if a path is absolute.
 9. **path.normalize():** path.normalize() cleans a path string by resolving . and .. segments and removing extra separators, returning a simplified path.
+
+
+## 8. What is callback hell?
+Callback Hell is a situation where multiple callbacks are nested inside each other, making code hard to read, understand, and maintain.
+
+```
+getUser(() => {
+  getOrders(() => {
+    getPayment(() => {
+      sendEmail(() => {
+        console.log("Done");
+      });
+    });
+  });
+});
+```
+
+## 9. What is promise hell?
+Promise Hell is a situation where multiple .then() chains become deeply nested or unnecessarily complex, making Promise-based code difficult to read and maintain.
+
+```
+getUser()
+  .then(user => {
+    return getOrders(user).then(orders => {
+      return getPayment(orders).then(payment => {
+        console.log(payment);
+      });
+    });
+  });
+```
+
+## 10. what is fs module?
+FS (File System) module is a built-in Node.js module used to create, read, write, update, and delete files and folders.
+
+FS module provides three ways to perform file system operations in Node.js: 
+1. synchronous
+2. callback-based asynchronous
+3. Promise-based asynchronous methods.
+
+- **readFile:** → For Reading the file
+- **writeFile:** → Write/Overwrite
+- **appendFile:** → Add data in file
+- **unlink:** → Delete file
+- **mkdir:** → Create folder
+- **rm:** → Delete folder
+- **readdir:** → Read folder contents
+- **rename:** → Rename/Move file and folder
+- **exists:** → check file or folder exists or not
+- **stat:** → Get file information
