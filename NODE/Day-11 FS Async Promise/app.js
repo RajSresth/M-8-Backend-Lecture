@@ -105,7 +105,3 @@ fs.writeFile("t4.txt", "Hello", (err) => {
 
 console.log("end");
 
-/**
- * ! Promise import ?
- * ! import, export  __filename, __dirname
- */
