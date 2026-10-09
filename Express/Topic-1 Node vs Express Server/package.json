@@ -1,0 +1,16 @@
+{
+  "name": "express-tutorial",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "dev:node": "node src/server.js",
+    "dev:express": "node src/app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
