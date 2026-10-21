@@ -5,14 +5,24 @@ dotenv.config();
 
 const app = express();
 
+// Global Middlewares
 app.use(express.json());
+
+// Routes Defined
 app.use("/api/v1/product", productRoutes);
 
-// http://localhost:3000   + /api/v1/product   + /create-product
-// http://localhost:3000/api/v1/product/get-all-products
-// http://localhost:3000/api/v1/product/get-single-product/1
-// http://localhost:3000/api/v1/product/update-product/1
-// http://localhost:3000/api/v1/product/delete-product/5
+
+// Centralised Error Handling Middleware
+app.use((err,req,res,next) => {
+
+  if(err)
+  {
+    return res.status(err.status || 500).json({
+      success: false,
+      message: err.message || "Internal Server Error"
+    })
+  }
+})
 
 const PORT = process.env.PORT || 4600;
 
