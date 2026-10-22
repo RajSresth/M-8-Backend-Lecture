@@ -1,31 +1,41 @@
 import express from "express";
+import helmet from "helmet";
 import productRoutes from "./routes/product.routes.js";
 import dotenv from "dotenv";
 dotenv.config();
+import connectDB from "./config/db.js";
 
 const app = express();
 
-// Global Middlewares
+// Built in Middleware
 app.use(express.json());
+
+// Third Party Middleware
+app.use(helmet());
+
+// Application-Logger Middleware
+app.use((req, res, next) => {
+  console.log("Log:", req.url);
+
+  next();
+});
 
 // Routes Defined
 app.use("/api/v1/product", productRoutes);
 
-
 // Centralised Error Handling Middleware
-app.use((err,req,res,next) => {
-
-  if(err)
-  {
+app.use((err, req, res, next) => {
+  if (err) {
     return res.status(err.status || 500).json({
       success: false,
-      message: err.message || "Internal Server Error"
-    })
+      message: err.message || "Internal Server Error",
+    });
   }
-})
+});
 
 const PORT = process.env.PORT || 4600;
 
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
+  await connectDB();
   console.log(`Server is running on http://localhost:${PORT}`);
 });
