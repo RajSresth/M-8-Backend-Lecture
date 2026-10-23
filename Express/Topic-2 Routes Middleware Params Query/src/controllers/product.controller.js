@@ -1,48 +1,53 @@
-import productsArr from "../constants/products.js";
+import Product from "../models/productModel.js";
 
 // Create Product
-export const createProduct = (req, res) => {
-  const data = req.body;
-  console.log(data);
+export const createProduct = async (req, res, next) => {
+  try {
+    const { itemName, price } = req.body;
+    console.log("itemName:", itemName);
+    console.log("price:", price);
 
-  if (!data) {
-    return res.status(400).json({
-      success: false,
-      message: "Data not found",
+    if (!itemName && itemName.length > 4) {
+      return res.status(400).json({
+        success: false,
+        message: "Item must be a character of 5 length",
+      });
+    }
+
+    if (!price) {
+      return res.status(400).json({
+        success: false,
+        message: "Price must be a number not 0",
+      });
+    }
+
+    const product = await Product.create({
+      itemName,
+      price,
     });
-  }
-
-  if (Array.isArray(data)) {
-    productsArr.push(...data);
 
     return res.status(201).json({
       success: true,
       message: "Product Created",
-      data: productsArr,
+      data: product,
     });
+  } catch (error) {
+    next(error);
   }
-
-  productsArr.push(data);
-
-  return res.status(201).json({
-    success: true,
-    message: "Product Created",
-    data: productsArr,
-  });
 };
 
 // Get All products Route
-export const getAllProducts = (req, res) => {
-  res.status(200).json(productsArr);
+export const getAllProducts = async (req, res) => {
+  const products = await Product.find({});
+
+  res.status(200).json(products);
 };
 
 // Get Single Product Route
-export const getSingleProduct = (req, res) => {
+export const getSingleProduct = async (req, res) => {
   const { productId } = req.params;
 
-  const product = productsArr.find(
-    (element) => element.id === Number(productId),
-  );
+  const product = await Product.find({ _id: productId });
 
   if (!product) {
     return res.status(400).json({

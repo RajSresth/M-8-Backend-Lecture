@@ -6,7 +6,7 @@ import {
   getSingleProduct,
   updateProduct,
 } from "../controllers/product.controller.js";
-import { checkAdmin } from "../middleware/checkAdmin.js";
+import { checkAdmin } from "../middlewares/checkAdmin.js";
 
 const productRouter = express.Router();
 
@@ -20,9 +20,9 @@ productRouter.get("/get-all-products", getAllProducts);
 productRouter.get("/get-single-product/:productId", getSingleProduct);
 
 // Update Only Field - PATCH
-productRouter.patch("/update-product/:productId",checkAdmin, updateProduct);
+productRouter.patch("/update-product/:productId", checkAdmin, updateProduct);
 
 // Delete Product
-productRouter.delete("/delete-product/:productId", checkAdmin,deleteProduct);
+productRouter.delete("/delete-product/:productId", checkAdmin, deleteProduct);
 
 export default productRouter;
