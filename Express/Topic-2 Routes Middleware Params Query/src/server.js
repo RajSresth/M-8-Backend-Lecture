@@ -15,13 +15,14 @@ app.use(express.json());
 // Third Party Middleware
 app.use(helmet());
 
-app.use(cors({
-  origin: process.env.FRONTEND_URL || "https://localhost:5173",
-  methods: ["GET","POST","PATCH","DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true
-}));
- 
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL || "https://localhost:5173",
+    methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+  }),
+);
 
 // Application-Logger Middleware
 app.use((req, res, next) => {
