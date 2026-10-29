@@ -6,13 +6,11 @@ import authRoutes from "./routes/auth.routes.js";
 import dotenv from "dotenv";
 dotenv.config();
 import connectDB from "./config/db.js";
-
+import errorMiddleware from "./middlewares/errorMiddleware.js";
 const app = express();
 
-// Built in Middleware
-app.use(express.json());
 
-// Third Party Middleware
+app.use(express.json());
 app.use(helmet());
 
 app.use(
@@ -36,14 +34,7 @@ app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/product", productRoutes);
 
 // Centralised Error Handling Middleware
-app.use((err, req, res, next) => {
-  if (err) {
-    return res.status(err.status || 500).json({
-      success: false,
-      message: err.message || "Internal Server Error",
-    });
-  }
-});
+app.use(errorMiddleware);
 
 const PORT = process.env.PORT || 4600;
 

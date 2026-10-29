@@ -19,7 +19,7 @@ const userSchema = mongoose.Schema(
       type: String,
       required: [true, "Password is required"],
       minlength: [8, "Password must be at least 8 characters long"],
-      trim: true,
+      trim: true
     },
     role: {
       type: String,
@@ -32,5 +32,5 @@ const userSchema = mongoose.Schema(
   { timestamps: true },
 );
 
-const User = new mongoose.Model("User", userSchema);
+const User = new mongoose.model("User", userSchema);
 export default User;

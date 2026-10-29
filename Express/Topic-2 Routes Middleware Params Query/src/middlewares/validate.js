@@ -1,18 +1,25 @@
 import validator from "validator";
 
 const validate = (req, res, next) => {
-  const { fullname, email, password } = req.body;
+  const { fullname, email, password, role } = req.body;
+  const validRoles = ["admin", "user"];
   const errors = [];
 
   if (
     typeof fullname !== "string" ||
-    !validator.isLength(fullname, { min: 3, max: 20 })
+    !validator.isLength(fullname.trim(), { min: 3, max: 20 })
   ) {
-    errors.push("Fullname must be 3-20 characters");
+    errors.push({
+      field: "fullname",
+      message: "Fullname must be 3-20 characters",
+    });
   }
 
   if (typeof email !== "string" || !validator.isEmail(email)) {
-    errors.push("Please provide a valid email");
+    errors.push({
+      field: "email",
+      message: "Please provide a valid email",
+    });
   }
 
   if (
@@ -26,7 +33,21 @@ const validate = (req, res, next) => {
       minSymbols: 1,
     })
   ) {
-    errors.push("Password must be 8-20 characters");
+    errors.push({
+      field: "password",
+      message:
+        "Password must be 8-20 characters with uppercase, lowercase, number and symbol",
+    });
+  }
+
+  if (
+    typeof role !== "string" ||
+    !validRoles.includes(role.trim().toLowerCase())
+  ) {
+    errors.push({
+      field: "role",
+      message: "Please provide a valid role",
+    });
   }
 
   if (errors.length > 0) {
@@ -36,13 +57,14 @@ const validate = (req, res, next) => {
     return next(err);
   }
 
-  req.validateUser = {
+  req.validUser = {
     fullname: fullname.trim(),
-    email: email.toLowerCase(),
+    email: email.trim().toLowerCase(),
     password: password.trim(),
+    role: role.toLowerCase().trim(),
   };
 
-  next(); // here i want to pass control to the controller
+  next();
 };
 
 export default validate;
