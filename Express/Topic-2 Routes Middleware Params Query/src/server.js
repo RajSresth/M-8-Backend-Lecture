@@ -1,6 +1,7 @@
 import express from "express";
 import helmet from "helmet";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import productRoutes from "./routes/product.routes.js";
 import authRoutes from "./routes/auth.routes.js";
 import dotenv from "dotenv";
@@ -9,9 +10,9 @@ import connectDB from "./config/db.js";
 import errorMiddleware from "./middlewares/errorMiddleware.js";
 const app = express();
 
-
 app.use(express.json());
 app.use(helmet());
+app.use(cookieParser());
 
 app.use(
   cors({

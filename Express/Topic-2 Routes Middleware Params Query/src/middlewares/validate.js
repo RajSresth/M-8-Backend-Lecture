@@ -1,7 +1,6 @@
 const validate = (schema) => {
   return (req, res, next) => {
     const result = schema.safeParse(req.body);
-    console.log(result);
 
     if (!result.success) {
       const err = new Error("Validation Failed");
@@ -16,7 +15,7 @@ const validate = (schema) => {
     const { fullname, email, password, role } = result.data;
 
     req.validUser = {
-      fullname: fullname.trim(),
+      fullname: fullname && fullname.trim(),
       email: email.trim().toLowerCase(),
       password: password.trim(),
       role: role.trim(),
